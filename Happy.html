@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Girlfriend's Day, Ouriee! ❤️</title>
+    <style>
+        :root {
+            --bg-color: #0f051d;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --accent-pink: #ff2a7a;
+            --accent-glow: rgba(255, 42, 122, 0.6);
+            --text-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #2c0b2d, #0f051d, #1a0230);
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Floating Colorful Elements Background */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .floating-item {
+            position: absolute;
+            font-size: 24px;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 105, 180, 0.3);
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            margin-top: 30px;
+            position: relative;
+        }
+
+        /* Sticker Banners / Badges */
+        .sticker-badge {
+            position: absolute;
+            background: #ffea00;
+            color: #000;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: rotate(-10deg);
+            z-index: 10;
+        }
+
+        .badge-1 { top: -15px; left: 20px; }
+        .badge-2 { top: -15px; right: 20px; background: #00ffff; transform: rotate(10deg); }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff758c, #ffeb3b, #00ffcc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255,117,140,0.4);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ff94b8;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        /* Photo Frame Support */
+        .photo-frame {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 25px auto;
+            border-radius: 50%;
+            border: 4px solid var(--accent-pink);
+            box-shadow: 0 0 25px var(--accent-glow);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-placeholder {
+            font-size: 60px;
+        }
+
+        /* Love Letter / Message Section */
+        .message-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 22px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            color: #f9f9f9;
+            border-left: 5px solid #00ffcc;
+            text-align: left;
+            position: relative;
+        }
+
+        /* "Open When" Interactive Notes */
+        .section-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #ffeb3b;
+            font-weight: bold;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .note-btn {
+            background: linear-gradient(135deg, rgba(255, 42, 122, 0.25), rgba(138, 43, 226, 0.25));
+            border: 2px solid var(--accent-pink);
+            color: white;
+            padding: 14px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .note-btn:hover {
+            background: var(--accent-pink);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        /* Popup Modal for Notes */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #22082b, #3c0934);
+            border: 3px solid #ffeb3b;
+            padding: 35px 25px;
+            border-radius: 20px;
+            max-width: 420px;
+            width: 85%;
+            text-align: center;
+            box-shadow: 0 0 35px rgba(255, 235, 59, 0.4);
+            position: relative;
+        }
+
+        .modal-content p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            color: #fff;
+        }
+
+        .close-btn {
+            background: #ff2a7a;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #ff5294;
+            transform: scale(1.05);
+        }
+
+        /* Surprise Button */
+        .surprise-btn {
+            background: linear-gradient(45deg, #ff2a7a, #9c27b0, #00bcd4);
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            border-radius: 35px;
+            cursor: pointer;
+            box-shadow: 0 0 25px var(--accent-glow);
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .surprise-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 35px #00ffcc;
+        }
+
+        #hidden-surprise {
+            display: none;
+            margin-top: 25px;
+            font-size: 1.3rem;
+            color: #00ffcc;
+            font-weight: bold;
+            animation: fadeIn 0.8s ease-in-out;
+            text-shadow: 0 0 10px rgba(0,255,204,0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Background Emojis/Stickers -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <div class="container">
+        <div class="sticker-badge badge-1">🌟 Sweatheart❣️</div>
+        <div class="sticker-badge badge-2">😘 Mi feeder😂😂</div>
+
+        <!-- Photo Frame (Instructions on how to add her picture below) -->
+        <div class="photo-frame">
+            <!-- 
+              TO ADD HER PICTURE: Replace the emoji below with:
+              <img src="YOUR_IMAGE_FILENAME.jpg" alt="Ouriee">
+            -->
+            <img src="Picture me.jpg" alt="Ouriee">
+        </div>
+
+        <h1>Happy Girlfriend's Day, Ouriee! 💖</h1>
+        <p class="subtitle">Certified cutie and my girl🥰...Fundi mwenyewe😂😂 🦄</p>
+
+        <!-- Personal Love Note -->
+        <div class="message-box">
+            <p>Hey Ouriee,</p><br>
+            <p>Life with you is genuinely hilarious, sweet, and wonderfully chaotic in the best way possible. Thank you for being my favorite person to talk to, laugh with, and annoy. You deserve all the stickers, treats, and love in the world today! 🍕🥰</p><br>
+            <p>C upaste namba nikueke za keki hapo what'sapp💀💀😶😁</p>
+        </div>
+
+        <!-- Interactive Open When Notes -->
+        <div class="section-title">Tap a sticker note when... 🎁</div>
+        <div class="notes-grid">
+            <button class="note-btn" onclick="openNote('You miss me')">🥺 You miss me</button>
+            <button class="note-btn" onclick="openNote('You need a laugh')">🤪 You need a laugh</button>
+            <button class="note-btn" onclick="openNote('Need cuddles')">😁 Need cuddles</button>
+            <button class="note-btn" onclick="openNote('Mechi')">🍆🍆💦💦 Mechi nayo</button>
+        </div>
+
+        <!-- Final Surprise Trigger -->
+        <button class="surprise-btn" onclick="revealSurprise()">Tap for Extra Love 🚀💌</button>
+        <div id="hidden-surprise">
+            I love you to the moon and back, Ouriee! You're stuck with me forever! 💖🦖✨
+        </div>
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal" id="noteModal">
+        <div class="modal-content">
+            <p id="modalText">Message goes here...</p>
+            <button class="close-btn" onclick="closeModal()">Got it! ❤️</button>
+        </div>
+    </div>
+
+    <script>
+        // Array of colorful stickers/emojis floating in the background
+        const stickerArray = ['💖', '✨', '🦄', '🍕', '🌸', '🧸', '👑', '💫', '🍓', '💌'];
+
+        function createFloatingSticker() {
+            const container = document.getElementById('heartsContainer');
+            const item = document.createElement('div');
+            item.classList.add('floating-item');
+            item.innerHTML = stickerArray[Math.floor(Math.random() * stickerArray.length)];
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            container.appendChild(item);
+
+            setTimeout(() => {
+                item.remove();
+            }, 7000);
+        }
+        setInterval(createFloatingSticker, 350);
+
+        // "Open When" Notes Data tailored for Ouriee
+        const notes = {
+            'You miss me': "Usikue hivyo😂 Hujanimiss vizuri...Basi ka una nimiss c we plan a meet up next week 😁",
+            'You need a laugh': "U laughing out of ur chest ile day nikikudigidigi made me enjoy ur lauhter. I love u bieng goofy around me! 🤪",
+            'Need cuddles': "Can't wait to have u wholesome as i choke u mummy🤗...Hizo cuddles unasemaje???",
+            'Mechi': "If yes can we meet next week so that i can show u how much i miss u😊"
+        };
+
+        function openNote(key) {
+            const modal = document.getElementById('noteModal');
+            const modalText = document.getElementById('modalText');
+            modalText.innerText = notes[key];
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('noteModal').style.display = 'none';
+        }
+
+        // Surprise reveal
+        function revealSurprise() {
+            const surpriseDiv = document.getElementById('hidden-surprise');
+            surpriseDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
